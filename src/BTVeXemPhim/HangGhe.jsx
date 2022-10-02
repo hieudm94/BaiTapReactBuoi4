@@ -20,6 +20,7 @@ class HangGhe extends Component {
       }
       
       return <button onClick={() => { 
+      
           this.props.datGhe(ghe)
        }} className={`ghe ${gheDaDat} ${cssGheDangDat}` } key={index}>
         {ghe.soGhe}
@@ -69,11 +70,12 @@ const mapDispatchToProps = (dispatch) =>{
         ghe
       })
     }
+
   }
 }
 
 
 
+const componentDatVeXemPhim = connect (mapStateToProps,mapDispatchToProps)(HangGhe);
 
-
-export default connect (mapStateToProps,mapDispatchToProps)(HangGhe)
+export default componentDatVeXemPhim;

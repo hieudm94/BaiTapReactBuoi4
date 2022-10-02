@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 
-export default class ThongTinGhe extends Component {
+class ThongTinGhe extends Component {
   render() {
     return (
       <div className='text-light' >
@@ -15,12 +15,30 @@ export default class ThongTinGhe extends Component {
             <tr >
               <th>Số ghế</th>
               <th>Giá </th>
-              <th>Hủy</th>
+              <th></th>
             </tr>
           </thead>
+    
           <tbody>
-
+            {this.props.DSGheDangDat.map((gheDangDat,index) => { 
+              return <tr key={index}>
+                <td>{gheDangDat.soGhe}</td>
+                <td>{gheDangDat.gia}</td>
+                <td><button onClick={() => { 
+                    this.props.huyGhe(gheDangDat.soGhe);
+                 }}>Hủy</button></td>
+              </tr>
+             })}
           </tbody>
+          <tfoot>
+            <tr>
+              <td>Tổng tiền</td>
+              <td>{this.props.DSGheDangDat.reduce((tongTien,gheDangDat,index) => { 
+                  return tongTien += gheDangDat.gia;
+               },0)}</td>
+               <td></td>
+            </tr>
+          </tfoot>
         </table>
 
       </div>
@@ -28,8 +46,23 @@ export default class ThongTinGhe extends Component {
   }
 }
 
-// const mapStateToProps= state =>{
-//   return{
-//     DSGheDangDat: state.
-//   }
-// }
+const mapDispatchToProps =(dispatch)=>{
+  return {
+    huyGhe:(soGhe) =>{
+      let action = {
+        type: "HUY_GHE",
+        soGhe
+      }
+      dispatch(action)
+    }
+  }
+}
+
+const mapStateToProps = (rootReducer) =>{
+  return {
+    DSGheDangDat : rootReducer.BTDatVeXemPhim.DSGheDangDat,
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(ThongTinGhe)
+
+

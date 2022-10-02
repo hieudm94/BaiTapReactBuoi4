@@ -19,6 +19,17 @@ export const BTDatVeXemPhim = (state = initialState,action) =>{
             state.DSGheDangDat = DSGheUpdate;
             return {...state};
         }
+
+        case "HUY_GHE":{
+            let DSGheDangDatUpdate = [...state.DSGheDangDat];
+            let index = DSGheDangDatUpdate.findIndex(gheDangDat => gheDangDat.soGhe === action.soGhe)
+            if(index !== -1){
+                DSGheDangDatUpdate.splice(index,1)
+            }
+
+            state.DSGheDangDat = DSGheDangDatUpdate;
+            return {...state}
+        }
         default:
             return state;
     }
