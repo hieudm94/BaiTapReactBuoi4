@@ -4,7 +4,7 @@ import HangGhe from './HangGhe'
 import ThongTinGhe from './ThongTinGhe'
 
 export default class BTVeXemPhim extends Component {
-  danhSachGhe = [
+  DSGhe = [
     {
       "hang": "",
       "danhSachGhe": [
@@ -190,18 +190,20 @@ export default class BTVeXemPhim extends Component {
   ]
 
   renderHangGhe = () => {
-    return this.danhSachGhe.map((hangGhe, index) => {
+    return this.DSGhe.map((hangGhe, index) => {
       return <div key={index}>
-        <HangGhe hangGhe={hangGhe} />
+        <HangGhe hangGhe={hangGhe} soHangGhe={index} />
       </div>
     })
   }
 
 
+
+
   render() {
     return (
-      <div className='bookingMovie' style={{ position: "fixed", backgroundImage: "url(./img/bgmovie.jpg)", height: "100%", width: "100%", backgroundSize: "100%" }}>
-        <div>
+      <div style={{ position: "fixed", backgroundImage: "url(./img/bgmovie.jpg)", height: "100%", width: "100%", backgroundSize: "100%" }}>
+        <div className='bookingMovie'> 
           <div className="row container-fluid">
             <div className="col-8 text-center">
               <h1 className='text-light'>MOVIE SEAT SELECTION</h1>
